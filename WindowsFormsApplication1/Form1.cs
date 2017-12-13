@@ -16,6 +16,8 @@ namespace WindowsFormsApplication1
     {
         static String str = "server=pathfinder.chpcq7i3yggs.us-west-2.rds.amazonaws.com;database=PathfinderApp;UID=visualstudio;password=12345";
         static MySqlConnection con = new MySqlConnection(str);
+        static int unifiedLogin = -1;
+        static Boolean isAdmin = false;
         public Form1()
         {
             InitializeComponent();
@@ -223,9 +225,22 @@ namespace WindowsFormsApplication1
             MySqlCommand cmd = new MySqlCommand(query, con);
             MySqlDataReader rdr = cmd.ExecuteReader();
             String storage = processReader(ref rdr);
-            rdr.Close();
             con.Close();
             MessageBox.Show(storage);
+        }
+
+        private void increaseUserScoreButton_Click(object sender, EventArgs e)
+        {
+            if(String.IsNullOrWhiteSpace(UserIDEntry.Text.ToString()))
+            {
+                MessageBox.Show("Please enter a valid user ID");
+                return;
+            }
+            String query = "UPDATE RANK SET RANK.participation_score = RANK.participation_score + 5 WHERE RANK.uid = " + int.Parse(UserIDEntry.Text) + ";";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
     }
 }

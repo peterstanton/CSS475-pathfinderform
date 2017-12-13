@@ -47,6 +47,7 @@
             this.grabLandscapesButton = new System.Windows.Forms.Button();
             this.fetchUserRankButton = new System.Windows.Forms.Button();
             this.GrabTopFiveButton = new System.Windows.Forms.Button();
+            this.increaseUserScoreButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -217,11 +218,22 @@
             this.GrabTopFiveButton.UseVisualStyleBackColor = true;
             this.GrabTopFiveButton.Click += new System.EventHandler(this.GrabTopFiveButton_Click);
             // 
+            // increaseUserScoreButton
+            // 
+            this.increaseUserScoreButton.Location = new System.Drawing.Point(318, 274);
+            this.increaseUserScoreButton.Name = "increaseUserScoreButton";
+            this.increaseUserScoreButton.Size = new System.Drawing.Size(121, 71);
+            this.increaseUserScoreButton.TabIndex = 21;
+            this.increaseUserScoreButton.Text = "Increment user score by 5";
+            this.increaseUserScoreButton.UseVisualStyleBackColor = true;
+            this.increaseUserScoreButton.Click += new System.EventHandler(this.increaseUserScoreButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1436, 505);
+            this.Controls.Add(this.increaseUserScoreButton);
             this.Controls.Add(this.GrabTopFiveButton);
             this.Controls.Add(this.fetchUserRankButton);
             this.Controls.Add(this.grabLandscapesButton);
@@ -270,6 +282,7 @@
         private System.Windows.Forms.Button grabLandscapesButton;
         private System.Windows.Forms.Button fetchUserRankButton;
         private System.Windows.Forms.Button GrabTopFiveButton;
+        private System.Windows.Forms.Button increaseUserScoreButton;
     }
 }
 
