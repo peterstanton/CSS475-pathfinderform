@@ -45,6 +45,7 @@
             this.listRefresh = new System.Windows.Forms.Button();
             this.mapviewListBox = new System.Windows.Forms.ListBox();
             this.grabLandscapesButton = new System.Windows.Forms.Button();
+            this.fetchUserRankButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -195,11 +196,22 @@
             this.grabLandscapesButton.UseVisualStyleBackColor = true;
             this.grabLandscapesButton.Click += new System.EventHandler(this.grabLandscapesButton_Click);
             // 
+            // fetchUserRankButton
+            // 
+            this.fetchUserRankButton.Location = new System.Drawing.Point(53, 227);
+            this.fetchUserRankButton.Name = "fetchUserRankButton";
+            this.fetchUserRankButton.Size = new System.Drawing.Size(75, 74);
+            this.fetchUserRankButton.TabIndex = 19;
+            this.fetchUserRankButton.Text = "Fetch User Rank";
+            this.fetchUserRankButton.UseVisualStyleBackColor = true;
+            this.fetchUserRankButton.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1436, 505);
+            this.Controls.Add(this.fetchUserRankButton);
             this.Controls.Add(this.grabLandscapesButton);
             this.Controls.Add(this.mapviewListBox);
             this.Controls.Add(this.listRefresh);
@@ -244,6 +256,7 @@
         private System.Windows.Forms.Button listRefresh;
         private System.Windows.Forms.ListBox mapviewListBox;
         private System.Windows.Forms.Button grabLandscapesButton;
+        private System.Windows.Forms.Button fetchUserRankButton;
     }
 }
 

@@ -165,18 +165,18 @@ namespace WindowsFormsApplication1
             con.Open();
             MySqlCommand cmd = new MySqlCommand(query, con);
             MySqlDataReader reader;
-            ListBoxItem newItem = new ListBoxItem();
-            newItem.Content = "<Select Map>";           
-            mapviewListBox.Items.Add(newItem.ToString());
+            mapviewListBox.Items.Add("<Select Map>");
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
+                ListBoxItem newItem = new ListBoxItem();
                 newItem = new ListBoxItem();
                 newItem.Content = reader["ID"].ToString();
-              //  MessageBox.Show(newItem.ToString().Substring(START,END);
-                mapviewListBox.Items.Add(newItem.ToString()); //this still prints crap.
+                String[] temp = newItem.ToString().Split(':');
+                mapviewListBox.Items.Add(int.Parse(temp[1])); //this still prints crap.
             }
             reader.Close();
+            con.Close();
         }
 
         private void grabLandscapesButton_Click(object sender, EventArgs e)
@@ -192,9 +192,57 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("You need to select a valid option.");
                 return;
             }
-            MessageBox.Show(text);
             String query = "SELECT * FROM LANDSCAPE WHERE LANDSCAPE.MID = " + int.Parse(text);
-            MessageBox.Show(query);
+            con.Open();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            String storage = "";
+            for (int i = 0; i < rdr.FieldCount; i++)
+            {
+                storage += rdr.GetName(i) + "    ";
+            }
+            storage += "\n";
+            while (rdr.Read())
+            {
+                for (int i = 0; i < rdr.FieldCount; i++)
+                {
+                    storage += rdr.GetString(i) + "    ";
+                }
+                storage += "\n";
+            }
+            con.Close();
+            rdr.Close();
+            MessageBox.Show(storage);
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if(String.IsNullOrWhiteSpace(UserIDEntry.Text.ToString()))
+            {
+                MessageBox.Show("You must enter a valid user ID");
+                return;
+            }
+            String query = "SELECT USER.ID, USER.fname, USER.lname, RANK.level, RANK.participation_score FROM USER RIGHT JOIN USER_RATING ON USER.ID = USER_RATING.UID RIGHT JOIN RANK ON USER.ID = RANK.UID WHERE USER.ID = " +
+                int.Parse(UserIDEntry.Text) + ";";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            String storage = "";
+            for (int i = 0; i < rdr.FieldCount; i++)
+            {
+                storage += rdr.GetName(i) + "    ";
+            }
+            storage += "\n";
+            while (rdr.Read())
+            {
+                for (int i = 0; i < rdr.FieldCount; i++)
+                {
+                    storage += rdr.GetString(i) + "    ";
+                }
+                storage += "\n";
+            }
+            con.Close();
+            MessageBox.Show(storage);
 
         }
     }
