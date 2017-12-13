@@ -16,8 +16,6 @@ namespace WindowsFormsApplication1
     {
         static String str = "server=pathfinder.chpcq7i3yggs.us-west-2.rds.amazonaws.com;database=PathfinderApp;UID=visualstudio;password=12345";
         static MySqlConnection con = new MySqlConnection(str);
-        static int unifiedLogin = -1;
-        static Boolean isAdmin = false;
         public Form1()
         {
             InitializeComponent();
