@@ -250,6 +250,20 @@ namespace WindowsFormsApplication1
             con.Close();
             MessageBox.Show(storage);
         }
+
+        private void deleteTrollButton_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(UserIDEntry.Text.ToString()))
+            {
+                MessageBox.Show("Enter a valid user ID to delete their ratings");
+                return;
+            }
+            String query = "DELETE FROM USER_RATING WHERE USER_RATING.UID = " + int.Parse(UserIDEntry.Text) + ";";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
     }
 }
 

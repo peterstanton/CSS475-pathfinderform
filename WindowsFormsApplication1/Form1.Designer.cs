@@ -51,6 +51,7 @@
             this.landscapeIDGetter = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.getPolysButton = new System.Windows.Forms.Button();
+            this.deleteTrollButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -257,11 +258,22 @@
             this.getPolysButton.UseVisualStyleBackColor = true;
             this.getPolysButton.Click += new System.EventHandler(this.getPolysButton_Click);
             // 
+            // deleteTrollButton
+            // 
+            this.deleteTrollButton.Location = new System.Drawing.Point(186, 290);
+            this.deleteTrollButton.Name = "deleteTrollButton";
+            this.deleteTrollButton.Size = new System.Drawing.Size(88, 55);
+            this.deleteTrollButton.TabIndex = 25;
+            this.deleteTrollButton.Text = "Delete troll ratings";
+            this.deleteTrollButton.UseVisualStyleBackColor = true;
+            this.deleteTrollButton.Click += new System.EventHandler(this.deleteTrollButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1436, 505);
+            this.Controls.Add(this.deleteTrollButton);
             this.Controls.Add(this.getPolysButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.landscapeIDGetter);
@@ -318,6 +330,7 @@
         private System.Windows.Forms.TextBox landscapeIDGetter;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button getPolysButton;
+        private System.Windows.Forms.Button deleteTrollButton;
     }
 }
 
