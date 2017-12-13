@@ -14,8 +14,11 @@ using MySql.Data.MySqlClient;
 
 namespace WindowsFormsApplication1
 {
+
     public partial class Form1 : Form
     {
+        static String str = "server=pathfinder.chpcq7i3yggs.us-west-2.rds.amazonaws.com;database=PathfinderApp;UID=visualstudio;password=12345";
+        static MySqlConnection con = new MySqlConnection(str);
         public Form1()
         {
             InitializeComponent();
@@ -26,13 +29,11 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void mapButton_click(object sender, EventArgs e)
         {
             try
             {
-                String str = "server=pathfinder.chpcq7i3yggs.us-west-2.rds.amazonaws.com;database=PathfinderApp;UID=visualstudio;password=12345";
                 String query = "select * from MAP";
-                MySqlConnection con = new MySqlConnection(str);
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 con.Open();
                 if (con.State == ConnectionState.Open)
@@ -48,6 +49,47 @@ namespace WindowsFormsApplication1
                     while (rdr.Read())
                     {
                         for(int i = 0; i < rdr.FieldCount; i++)
+                        {
+                            storage += rdr.GetString(i) + "    ";
+                        }
+                        storage += "\n";
+                    }
+                    rdr.Close();
+                    MessageBox.Show(storage);
+
+                }
+
+                else
+                    MessageBox.Show("Disconnected");
+                DataSet ds = new DataSet();
+                con.Close();
+            }
+            catch (Exception es)
+            {
+                MessageBox.Show(es.Message);
+            }
+        }
+
+        private void usersButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String query = "select * from USER";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                con.Open();
+                if (con.State == ConnectionState.Open)
+                {
+                    MessageBox.Show("Connected");
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    String storage = "";
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        storage += rdr.GetName(i) + "    ";
+                    }
+                    storage += "\n";
+                    while (rdr.Read())
+                    {
+                        for (int i = 0; i < rdr.FieldCount; i++)
                         {
                             storage += rdr.GetString(i) + "    ";
                         }
