@@ -264,6 +264,17 @@ namespace WindowsFormsApplication1
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
+        private void getPopPinsButton_Click(object sender, EventArgs e)
+        {
+            String query = "SELECT PINPOINT.name, COUNT(USER_RATING.PID) FROM PINPOINT, USER_RATING WHERE PINPOINT.ID = USER_RATING.PID AND USER_RATING.PID NOT IN(SELECT USER_RATING.PID FROM USER_RATING WHERE USER_RATING.rating = false) GROUP BY PINPOINT.ID ORDER BY -COUNT(USER_RATING.PID);";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            String storage = processReader(ref rdr);
+            con.Close();
+            MessageBox.Show(storage);
+        }
     }
 }
 

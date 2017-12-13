@@ -52,6 +52,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.getPolysButton = new System.Windows.Forms.Button();
             this.deleteTrollButton = new System.Windows.Forms.Button();
+            this.getPopPinsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -268,11 +269,22 @@
             this.deleteTrollButton.UseVisualStyleBackColor = true;
             this.deleteTrollButton.Click += new System.EventHandler(this.deleteTrollButton_Click);
             // 
+            // getPopPinsButton
+            // 
+            this.getPopPinsButton.Location = new System.Drawing.Point(48, 428);
+            this.getPopPinsButton.Name = "getPopPinsButton";
+            this.getPopPinsButton.Size = new System.Drawing.Size(96, 57);
+            this.getPopPinsButton.TabIndex = 26;
+            this.getPopPinsButton.Text = "Get popular pinpoints";
+            this.getPopPinsButton.UseVisualStyleBackColor = true;
+            this.getPopPinsButton.Click += new System.EventHandler(this.getPopPinsButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1436, 505);
+            this.Controls.Add(this.getPopPinsButton);
             this.Controls.Add(this.deleteTrollButton);
             this.Controls.Add(this.getPolysButton);
             this.Controls.Add(this.label5);
@@ -331,6 +343,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button getPolysButton;
         private System.Windows.Forms.Button deleteTrollButton;
+        private System.Windows.Forms.Button getPopPinsButton;
     }
 }
 
