@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Windows.Controls;
@@ -218,7 +212,7 @@ namespace WindowsFormsApplication1
 
         private void GrabTopFiveButton_Click(object sender, EventArgs e)
         {
-            String query = "SELECT USER.fname, USER.lname, RANK.participation_score FROM USER, RANK WHERE USER.ID = RANK.UID AND USER.admin = false ORDER BY RANK.participation_score;";
+            String query = "SELECT USER.fname, USER.lname, RANK.participation_score FROM USER, RANK WHERE USER.ID = RANK.UID AND USER.admin = false ORDER BY RANK.participation_score DESC limit 5;";
             con.Open();
             MySqlCommand cmd = new MySqlCommand(query, con);
             MySqlDataReader rdr = cmd.ExecuteReader();
