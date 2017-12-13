@@ -188,7 +188,6 @@ namespace WindowsFormsApplication1
             MySqlDataReader rdr = cmd.ExecuteReader();
             String storage = processReader(ref rdr);
             con.Close();
-            rdr.Close();
             MessageBox.Show(storage);
         }
 
@@ -233,6 +232,23 @@ namespace WindowsFormsApplication1
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
+        }
+
+        private void getPolysButton_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(landscapeIDGetter.Text.ToString()))
+            {
+                MessageBox.Show("Enter a valid landscape ID.");
+                return;
+            }
+            String query = "SELECT LANDSCAPE.name, Count(LANDSCAPE_POLYGON_POINTS.point_ID) AS 'Count of polygon points' FROM LANDSCAPE INNER JOIN LANDSCAPE_POLYGON_POINTS ON LANDSCAPE.ID = LANDSCAPE_POLYGON_POINTS.landscape_ID WHERE LANDSCAPE_POLYGON_POINTS.landscape_ID = " + int.Parse(landscapeIDGetter.Text) + " ORDER BY LANDSCAPE.ID;";
+            MessageBox.Show(query);
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            String storage = processReader(ref rdr);
+            con.Close();
+            MessageBox.Show(storage);
         }
     }
 }

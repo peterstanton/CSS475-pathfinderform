@@ -48,6 +48,9 @@
             this.fetchUserRankButton = new System.Windows.Forms.Button();
             this.GrabTopFiveButton = new System.Windows.Forms.Button();
             this.increaseUserScoreButton = new System.Windows.Forms.Button();
+            this.landscapeIDGetter = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.getPolysButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -228,11 +231,40 @@
             this.increaseUserScoreButton.UseVisualStyleBackColor = true;
             this.increaseUserScoreButton.Click += new System.EventHandler(this.increaseUserScoreButton_Click);
             // 
+            // landscapeIDGetter
+            // 
+            this.landscapeIDGetter.Location = new System.Drawing.Point(594, 157);
+            this.landscapeIDGetter.Name = "landscapeIDGetter";
+            this.landscapeIDGetter.Size = new System.Drawing.Size(100, 22);
+            this.landscapeIDGetter.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(591, 137);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(95, 17);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Landscape ID";
+            // 
+            // getPolysButton
+            // 
+            this.getPolysButton.Location = new System.Drawing.Point(594, 205);
+            this.getPolysButton.Name = "getPolysButton";
+            this.getPolysButton.Size = new System.Drawing.Size(75, 55);
+            this.getPolysButton.TabIndex = 24;
+            this.getPolysButton.Text = "Find Polys";
+            this.getPolysButton.UseVisualStyleBackColor = true;
+            this.getPolysButton.Click += new System.EventHandler(this.getPolysButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1436, 505);
+            this.Controls.Add(this.getPolysButton);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.landscapeIDGetter);
             this.Controls.Add(this.increaseUserScoreButton);
             this.Controls.Add(this.GrabTopFiveButton);
             this.Controls.Add(this.fetchUserRankButton);
@@ -283,6 +315,9 @@
         private System.Windows.Forms.Button fetchUserRankButton;
         private System.Windows.Forms.Button GrabTopFiveButton;
         private System.Windows.Forms.Button increaseUserScoreButton;
+        private System.Windows.Forms.TextBox landscapeIDGetter;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button getPolysButton;
     }
 }
 
