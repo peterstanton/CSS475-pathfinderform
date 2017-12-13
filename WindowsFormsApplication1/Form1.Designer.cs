@@ -46,6 +46,7 @@
             this.mapviewListBox = new System.Windows.Forms.ListBox();
             this.grabLandscapesButton = new System.Windows.Forms.Button();
             this.fetchUserRankButton = new System.Windows.Forms.Button();
+            this.GrabTopFiveButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -70,7 +71,7 @@
             // 
             // quitButton
             // 
-            this.quitButton.Location = new System.Drawing.Point(314, 440);
+            this.quitButton.Location = new System.Drawing.Point(435, 440);
             this.quitButton.Name = "quitButton";
             this.quitButton.Size = new System.Drawing.Size(75, 23);
             this.quitButton.TabIndex = 3;
@@ -204,13 +205,24 @@
             this.fetchUserRankButton.TabIndex = 19;
             this.fetchUserRankButton.Text = "Fetch User Rank";
             this.fetchUserRankButton.UseVisualStyleBackColor = true;
-            this.fetchUserRankButton.Click += new System.EventHandler(this.button2_Click_1);
+            this.fetchUserRankButton.Click += new System.EventHandler(this.getRankButton_click);
+            // 
+            // GrabTopFiveButton
+            // 
+            this.GrabTopFiveButton.Location = new System.Drawing.Point(186, 440);
+            this.GrabTopFiveButton.Name = "GrabTopFiveButton";
+            this.GrabTopFiveButton.Size = new System.Drawing.Size(90, 34);
+            this.GrabTopFiveButton.TabIndex = 20;
+            this.GrabTopFiveButton.Text = "Get Top 5";
+            this.GrabTopFiveButton.UseVisualStyleBackColor = true;
+            this.GrabTopFiveButton.Click += new System.EventHandler(this.GrabTopFiveButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1436, 505);
+            this.Controls.Add(this.GrabTopFiveButton);
             this.Controls.Add(this.fetchUserRankButton);
             this.Controls.Add(this.grabLandscapesButton);
             this.Controls.Add(this.mapviewListBox);
@@ -257,6 +269,7 @@
         private System.Windows.Forms.ListBox mapviewListBox;
         private System.Windows.Forms.Button grabLandscapesButton;
         private System.Windows.Forms.Button fetchUserRankButton;
+        private System.Windows.Forms.Button GrabTopFiveButton;
     }
 }
 

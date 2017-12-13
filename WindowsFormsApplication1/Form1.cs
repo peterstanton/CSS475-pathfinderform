@@ -21,6 +21,26 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        private String processReader(ref MySqlDataReader fromDatabase)
+        {
+            String storage = "";
+            for (int i = 0; i < fromDatabase.FieldCount; i++)
+            {
+                storage += fromDatabase.GetName(i) + "    ";
+            }
+            storage += "\n";
+            while (fromDatabase.Read())
+            {
+                for (int i = 0; i < fromDatabase.FieldCount; i++)
+                {
+                    storage += fromDatabase.GetString(i) + "    ";
+                }
+                storage += "\n";
+            }
+            fromDatabase.Close();
+            return storage;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -75,20 +95,7 @@ namespace WindowsFormsApplication1
                 {
                     MessageBox.Show("Connected");
                     MySqlDataReader rdr = cmd.ExecuteReader();
-                    String storage = "";
-                    for (int i = 0; i < rdr.FieldCount; i++)
-                    {
-                        storage += rdr.GetName(i) + "    ";
-                    }
-                    storage += "\n";
-                    while (rdr.Read())
-                    {
-                        for (int i = 0; i < rdr.FieldCount; i++)
-                        {
-                            storage += rdr.GetString(i) + "    ";
-                        }
-                        storage += "\n";
-                    }
+                    String storage = processReader(ref rdr);
                     rdr.Close();
                     MessageBox.Show(storage);
                 }
@@ -114,12 +121,14 @@ namespace WindowsFormsApplication1
 
         private void submitUser_Click(object sender, EventArgs e)
         {
-            String query = "insert into USER values (\'" + int.Parse(UserIDEntry.Text) + "\' , " +
+            String query = "insert into USER values (" + int.Parse(UserIDEntry.Text) + ", " +
                 (adminCheckBox.Checked) + ", \'" + fnameBox.Text + "\', \'" + lnameBox.Text + "\');";
-            //   MessageBox.Show(query);
+            String query2 = "insert into RANK values (" + int.Parse(UserIDEntry.Text) + ", \'Newbie\', 0);";
             MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd2 = new MySqlCommand(query2, con);
             con.Open();
             cmd.ExecuteNonQuery();
+            cmd2.ExecuteNonQuery();
             con.Close();
         }
 
@@ -136,20 +145,7 @@ namespace WindowsFormsApplication1
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 con.Open();
                 MySqlDataReader rdr = cmd.ExecuteReader();
-                String storage = "";
-                for (int i = 0; i < rdr.FieldCount; i++)
-                {
-                    storage += rdr.GetName(i) + "    ";
-                }
-                storage += "\n";
-                while (rdr.Read())
-                {
-                    for (int i = 0; i < rdr.FieldCount; i++)
-                    {
-                        storage += rdr.GetString(i) + "    ";
-                    }
-                    storage += "\n";
-                }
+                String storage = processReader(ref rdr);
                 con.Close();
                 MessageBox.Show(storage);
             }
@@ -196,54 +192,40 @@ namespace WindowsFormsApplication1
             con.Open();
             MySqlCommand cmd = new MySqlCommand(query, con);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            String storage = "";
-            for (int i = 0; i < rdr.FieldCount; i++)
-            {
-                storage += rdr.GetName(i) + "    ";
-            }
-            storage += "\n";
-            while (rdr.Read())
-            {
-                for (int i = 0; i < rdr.FieldCount; i++)
-                {
-                    storage += rdr.GetString(i) + "    ";
-                }
-                storage += "\n";
-            }
+            String storage = processReader(ref rdr);
             con.Close();
             rdr.Close();
             MessageBox.Show(storage);
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void getRankButton_click(object sender, EventArgs e)
         {
             if(String.IsNullOrWhiteSpace(UserIDEntry.Text.ToString()))
             {
                 MessageBox.Show("You must enter a valid user ID");
                 return;
             }
-            String query = "SELECT USER.ID, USER.fname, USER.lname, RANK.level, RANK.participation_score FROM USER RIGHT JOIN USER_RATING ON USER.ID = USER_RATING.UID RIGHT JOIN RANK ON USER.ID = RANK.UID WHERE USER.ID = " +
+            String query = "SELECT USER.ID, USER.fname, USER.lname, RANK.level, RANK.participation_score FROM USER RIGHT JOIN RANK ON USER.ID = RANK.UID WHERE USER.ID = " +
                 int.Parse(UserIDEntry.Text) + ";";
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             MySqlDataReader rdr = cmd.ExecuteReader();
-            String storage = "";
-            for (int i = 0; i < rdr.FieldCount; i++)
-            {
-                storage += rdr.GetName(i) + "    ";
-            }
-            storage += "\n";
-            while (rdr.Read())
-            {
-                for (int i = 0; i < rdr.FieldCount; i++)
-                {
-                    storage += rdr.GetString(i) + "    ";
-                }
-                storage += "\n";
-            }
+            String storage = processReader(ref rdr);
             con.Close();
             MessageBox.Show(storage);
 
+        }
+
+        private void GrabTopFiveButton_Click(object sender, EventArgs e)
+        {
+            String query = "SELECT USER.fname, USER.lname, RANK.participation_score FROM USER, RANK WHERE USER.ID = RANK.UID AND USER.admin = false ORDER BY RANK.participation_score;";
+            con.Open();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            String storage = processReader(ref rdr);
+            rdr.Close();
+            con.Close();
+            MessageBox.Show(storage);
         }
     }
 }
