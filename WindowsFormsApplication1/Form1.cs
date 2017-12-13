@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+
 
 
 
@@ -30,16 +31,36 @@ namespace WindowsFormsApplication1
             try
             {
                 String str = "server=pathfinder.chpcq7i3yggs.us-west-2.rds.amazonaws.com;database=PathfinderApp;UID=visualstudio;password=12345";
-                String query = "select * from map";
-                SqlConnection con = new SqlConnection(str);
-                SqlCommand cmd = new SqlCommand(query, con);
+                String query = "select * from MAP";
+                MySqlConnection con = new MySqlConnection(str);
+                MySqlCommand cmd = new MySqlCommand(query, con);
                 con.Open();
                 if (con.State == ConnectionState.Open)
+                {
                     MessageBox.Show("Connected");
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    String storage = "";
+                    for(int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        storage += rdr.GetName(i) + "    ";
+                    }
+                    storage += "\n";
+                    while (rdr.Read())
+                    {
+                        for(int i = 0; i < rdr.FieldCount; i++)
+                        {
+                            storage += rdr.GetString(i) + "    ";
+                        }
+                        storage += "\n";
+                    }
+                    rdr.Close();
+                    MessageBox.Show(storage);
+
+                }
+
                 else
                     MessageBox.Show("Disconnected");
                 DataSet ds = new DataSet();
-                MessageBox.Show("connect with sql server");
                 con.Close();
             }
             catch (Exception es)
