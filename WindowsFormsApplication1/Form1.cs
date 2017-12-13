@@ -8,9 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-
-
-
+using System.Windows.Controls;
 
 namespace WindowsFormsApplication1
 {
@@ -40,14 +38,14 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("Connected");
                     MySqlDataReader rdr = cmd.ExecuteReader();
                     String storage = "";
-                    for(int i = 0; i < rdr.FieldCount; i++)
+                    for (int i = 0; i < rdr.FieldCount; i++)
                     {
                         storage += rdr.GetName(i) + "    ";
                     }
                     storage += "\n";
                     while (rdr.Read())
                     {
-                        for(int i = 0; i < rdr.FieldCount; i++)
+                        for (int i = 0; i < rdr.FieldCount; i++)
                         {
                             storage += rdr.GetString(i) + "    ";
                         }
@@ -116,9 +114,9 @@ namespace WindowsFormsApplication1
 
         private void submitUser_Click(object sender, EventArgs e)
         {
-            String query = "insert into USER values (\'" + int.Parse(UserIDEntry.Text) + "\' , " + 
+            String query = "insert into USER values (\'" + int.Parse(UserIDEntry.Text) + "\' , " +
                 (adminCheckBox.Checked) + ", \'" + fnameBox.Text + "\', \'" + lnameBox.Text + "\');";
-         //   MessageBox.Show(query);
+            //   MessageBox.Show(query);
             MySqlCommand cmd = new MySqlCommand(query, con);
             con.Open();
             cmd.ExecuteNonQuery();
@@ -133,7 +131,7 @@ namespace WindowsFormsApplication1
         private void button2_Click(object sender, EventArgs e)
         {
             String query = "SELECT * FROM USER_RATING WHERE USER_RATING.UID = " + int.Parse(UserIDEntry.Text);
-            if(!string.IsNullOrWhiteSpace(UserIDEntry.Text))
+            if (!string.IsNullOrWhiteSpace(UserIDEntry.Text))
             {
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 con.Open();
@@ -155,11 +153,50 @@ namespace WindowsFormsApplication1
                 con.Close();
                 MessageBox.Show(storage);
             }
-            else {
+            else
+            {
                 MessageBox.Show("You need to enter a user ID...");
             }
         }
 
-            
+        private void listRefresh_Click(object sender, EventArgs e) {
+            mapviewListBox.Items.Clear();
+            string query = "SELECT * FROM MAP;";
+            con.Open();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlDataReader reader;
+            ListBoxItem newItem = new ListBoxItem();
+            newItem.Content = "<Select Map>";           
+            mapviewListBox.Items.Add(newItem.ToString());
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                newItem = new ListBoxItem();
+                newItem.Content = reader["ID"].ToString();
+              //  MessageBox.Show(newItem.ToString().Substring(START,END);
+                mapviewListBox.Items.Add(newItem.ToString()); //this still prints crap.
+            }
+            reader.Close();
         }
+
+        private void grabLandscapesButton_Click(object sender, EventArgs e)
+        {
+            if(mapviewListBox.Items.Count < 1)
+            {
+                MessageBox.Show("Please refresh the list of maps first");
+                return;
+            }
+            String text = mapviewListBox.GetItemText(mapviewListBox.SelectedItem);
+            if(text == "<Select Map>")
+            {
+                MessageBox.Show("You need to select a valid option.");
+                return;
+            }
+            MessageBox.Show(text);
+            String query = "SELECT * FROM LANDSCAPE WHERE LANDSCAPE.MID = " + int.Parse(text);
+            MessageBox.Show(query);
+
+        }
+    }
 }
+

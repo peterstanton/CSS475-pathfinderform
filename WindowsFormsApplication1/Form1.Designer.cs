@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.usersButton = new System.Windows.Forms.Button();
             this.quitButton = new System.Windows.Forms.Button();
@@ -42,6 +41,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.listRefresh = new System.Windows.Forms.Button();
+            this.mapviewListBox = new System.Windows.Forms.ListBox();
+            this.grabLandscapesButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -53,13 +56,6 @@
             this.button1.Text = "Map Data";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.mapButton_click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(561, 305);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(206, 22);
-            this.textBox1.TabIndex = 1;
             // 
             // usersButton
             // 
@@ -116,7 +112,7 @@
             // 
             // submitUser
             // 
-            this.submitUser.Location = new System.Drawing.Point(292, 101);
+            this.submitUser.Location = new System.Drawing.Point(323, 101);
             this.submitUser.Name = "submitUser";
             this.submitUser.Size = new System.Drawing.Size(75, 53);
             this.submitUser.TabIndex = 8;
@@ -126,11 +122,11 @@
             // 
             // getUserRanks
             // 
-            this.getUserRanks.Location = new System.Drawing.Point(71, 130);
+            this.getUserRanks.Location = new System.Drawing.Point(48, 101);
             this.getUserRanks.Name = "getUserRanks";
             this.getUserRanks.Size = new System.Drawing.Size(75, 79);
             this.getUserRanks.TabIndex = 9;
-            this.getUserRanks.Text = "Retrieve user rankings";
+            this.getUserRanks.Text = "Retrieve user rankings by ID";
             this.getUserRanks.UseVisualStyleBackColor = true;
             this.getUserRanks.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -161,11 +157,53 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "Last name";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1020, 33);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(42, 17);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Maps";
+            // 
+            // listRefresh
+            // 
+            this.listRefresh.Location = new System.Drawing.Point(1181, 130);
+            this.listRefresh.Name = "listRefresh";
+            this.listRefresh.Size = new System.Drawing.Size(75, 50);
+            this.listRefresh.TabIndex = 15;
+            this.listRefresh.Text = "Refresh List";
+            this.listRefresh.UseVisualStyleBackColor = true;
+            this.listRefresh.Click += new System.EventHandler(this.listRefresh_Click);
+            // 
+            // mapviewListBox
+            // 
+            this.mapviewListBox.FormattingEnabled = true;
+            this.mapviewListBox.ItemHeight = 16;
+            this.mapviewListBox.Location = new System.Drawing.Point(702, 70);
+            this.mapviewListBox.Name = "mapviewListBox";
+            this.mapviewListBox.Size = new System.Drawing.Size(451, 276);
+            this.mapviewListBox.TabIndex = 17;
+            // 
+            // grabLandscapesButton
+            // 
+            this.grabLandscapesButton.Location = new System.Drawing.Point(1181, 239);
+            this.grabLandscapesButton.Name = "grabLandscapesButton";
+            this.grabLandscapesButton.Size = new System.Drawing.Size(75, 62);
+            this.grabLandscapesButton.TabIndex = 18;
+            this.grabLandscapesButton.Text = "List Landscapes";
+            this.grabLandscapesButton.UseVisualStyleBackColor = true;
+            this.grabLandscapesButton.Click += new System.EventHandler(this.grabLandscapesButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1436, 505);
+            this.Controls.Add(this.grabLandscapesButton);
+            this.Controls.Add(this.mapviewListBox);
+            this.Controls.Add(this.listRefresh);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -177,10 +215,10 @@
             this.Controls.Add(this.UserIDEntry);
             this.Controls.Add(this.quitButton);
             this.Controls.Add(this.usersButton);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.RightToLeftLayout = true;
+            this.Text = "Pathfinder";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -190,7 +228,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button usersButton;
         private System.Windows.Forms.Button quitButton;
@@ -203,6 +240,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button listRefresh;
+        private System.Windows.Forms.ListBox mapviewListBox;
+        private System.Windows.Forms.Button grabLandscapesButton;
     }
 }
 
