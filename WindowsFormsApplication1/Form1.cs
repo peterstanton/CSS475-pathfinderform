@@ -14,7 +14,6 @@ using MySql.Data.MySqlClient;
 
 namespace WindowsFormsApplication1
 {
-
     public partial class Form1 : Form
     {
         static String str = "server=pathfinder.chpcq7i3yggs.us-west-2.rds.amazonaws.com;database=PathfinderApp;UID=visualstudio;password=12345";
@@ -56,12 +55,9 @@ namespace WindowsFormsApplication1
                     }
                     rdr.Close();
                     MessageBox.Show(storage);
-
                 }
-
                 else
                     MessageBox.Show("Disconnected");
-                DataSet ds = new DataSet();
                 con.Close();
             }
             catch (Exception es)
@@ -97,12 +93,9 @@ namespace WindowsFormsApplication1
                     }
                     rdr.Close();
                     MessageBox.Show(storage);
-
                 }
-
                 else
                     MessageBox.Show("Disconnected");
-                DataSet ds = new DataSet();
                 con.Close();
             }
             catch (Exception es)
@@ -110,5 +103,63 @@ namespace WindowsFormsApplication1
                 MessageBox.Show(es.Message);
             }
         }
-    }
+
+        private void quitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void submitUser_Click(object sender, EventArgs e)
+        {
+            String query = "insert into USER values (\'" + int.Parse(UserIDEntry.Text) + "\' , " + 
+                (adminCheckBox.Checked) + ", \'" + fnameBox.Text + "\', \'" + lnameBox.Text + "\');";
+         //   MessageBox.Show(query);
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private void UserIDEntry_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            String query = "SELECT * FROM USER_RATING WHERE USER_RATING.UID = " + int.Parse(UserIDEntry.Text);
+            if(!string.IsNullOrWhiteSpace(UserIDEntry.Text))
+            {
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                con.Open();
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                String storage = "";
+                for (int i = 0; i < rdr.FieldCount; i++)
+                {
+                    storage += rdr.GetName(i) + "    ";
+                }
+                storage += "\n";
+                while (rdr.Read())
+                {
+                    for (int i = 0; i < rdr.FieldCount; i++)
+                    {
+                        storage += rdr.GetString(i) + "    ";
+                    }
+                    storage += "\n";
+                }
+                con.Close();
+                MessageBox.Show(storage);
+            }
+            else {
+                MessageBox.Show("You need to enter a user ID...");
+            }
+        }
+
+            
+        }
 }
